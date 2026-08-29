@@ -4,7 +4,7 @@ A study companion app built with Expo, that lets users keep track of homework, a
 
 ## Features
 
-Overview Screen (Dashboard/Home): number of sessions, hours spent studying, progress, deadlines approaching, plus a week chart. A burger menu in the top-right corner leads to all other screens.
+Overview Screen (Dashboard/Home): number of sessions, hours spent studying, progress, deadlines approaching, plus a week chart. A burger menu in the top right corner leads to all other screens.
 
 Tasks: general tasks, assignments, tests, each with an optional subject and a due date.
 
@@ -12,7 +12,7 @@ Subjects: tasks organized by subject with a weekly study goal per subject.
 
 Study Timer: customizable or preset time, optionally linked to a subject; tracks real time to count toward your session so that it cannot be fooled by suspending the app or putting your phone to sleep; automatically logs a completed session upon finishing a session, and if you've enabled reminders, you'll get a local notification the moment a session ends even if you were not using the app.
 
-Calendar: select a date to view your scheduled sessions, deadlines due on that date, and sessions completed on that date; schedule a session with an optional time.
+Calendar: select a date to view your scheduled sessions, deadlines due on that date, and sessions completed on that date, schedule a session with an optional time.
 
 Goals: daily, weekly, and per-subject hour goals with progress bars.
 
