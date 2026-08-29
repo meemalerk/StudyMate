@@ -1,19 +1,26 @@
 # StudyMate
 
-A study companion app built with Expo — track tasks, assignments and exams, manage subjects, run a study timer, plan sessions on a calendar, set study goals, and get reminders.
+A study companion app built with Expo, that lets users keep track of homework, assignments and tests, manage their subjects, a study timer, study sessions planner, set study goals and receive reminders.
 
 ## Features
 
-- **Dashboard (Home)** — today's sessions, hours studied, completion stats, upcoming deadlines, and a weekly progress chart. A hamburger menu (top right) navigates to every other screen.
-- **Tasks** — general tasks, assignments, and exams, each with an optional subject and due date.
-- **Subjects** — organize tasks by subject, with a per-subject weekly study goal.
-- **Study Timer** — preset or custom durations, optionally tagged to a subject. Tracks real elapsed time (not just a tick counter), so it stays accurate even if the app is backgrounded or the phone is locked; completed sessions are logged automatically, and if Reminders are on you'll get a notification the moment a session finishes, even away from the app.
-- **Study Calendar** — pick a date to see scheduled sessions, deadlines due that day, and sessions completed that day; schedule new sessions with an optional time.
-- **Study Goals** — daily, weekly, and per-subject hour goals with progress bars.
-- **Reminders** — local notifications for upcoming deadlines, scheduled study sessions, and timer completion.
-- **Settings** — toggle reminders and choose a theme (System / Light / Dark).
+Overview Screen (Dashboard/Home): number of sessions, hours spent studying, progress, deadlines approaching, plus a week chart. A burger menu in the top-right corner leads to all other screens.
 
-All data (tasks, subjects, sessions, goals, preferences) is saved on-device and persists across app restarts.
+Tasks: general tasks, assignments, tests, each with an optional subject and a due date.
+
+Subjects: tasks organized by subject with a weekly study goal per subject.
+
+Study Timer: customizable or preset time, optionally linked to a subject; tracks real time to count toward your session so that it cannot be fooled by suspending the app or putting your phone to sleep; automatically logs a completed session upon finishing a session, and if you've enabled reminders, you'll get a local notification the moment a session ends even if you were not using the app.
+
+Calendar: select a date to view your scheduled sessions, deadlines due on that date, and sessions completed on that date; schedule a session with an optional time.
+
+Goals: daily, weekly, and per-subject hour goals with progress bars.
+
+Reminders: local notifications for upcoming deadlines, scheduled study sessions, and completed timers.
+
+Settings: enable/disable reminders and set a theme (System / Light / Dark).
+
+All your tasks, subjects, sessions, and preferences are stored locally on your device for convenience and privacy and are preserved after restarting the app.
 
 ## Screenshots
 
@@ -23,13 +30,13 @@ All data (tasks, subjects, sessions, goals, preferences) is saved on-device and 
 | <img src="Screenshots/timer.jpg" width="220" alt="Study timer" /><br>**Study Timer** — preset or custom countdown, optionally tagged to a subject | <img src="Screenshots/calendar.jpg" width="220" alt="Study calendar" /><br>**Study Calendar** — scheduled sessions, deadlines, and completed sessions by date |
 | <img src="Screenshots/settings.jpg" width="220" alt="Settings screen" /><br>**Settings** — reminders toggle and theme (System / Light / Dark) | |
 
-**Navigation flow:** the hamburger icon in the top-right of Home opens a dropdown linking to Subjects, Study Timer, Study Calendar, and Settings. Every other screen has a back arrow (top-left) that returns to Home.
+Navigation flow: the hamburger icon at the top-right of Home screen opens a drop-down menu with links to Subjects, Study timer, Study calendar, and Settings. All other screens have a back button (top-left) that takes the user back to the Home screen.
 
 ## Requirements
 
 - [Node.js](https://nodejs.org/) (LTS)
 - npm
-- The [Expo Go](https://expo.dev/go) app on your phone (iOS or Android) — **the Expo Go build on the App/Play Store must support Expo SDK 54**, which is what this project targets. If Expo Go reports a version mismatch, either wait for Apple/Google to approve the newer Expo Go build, or ask about downgrading this project to match whatever SDK your installed Expo Go currently supports.
+- The [Expo Go](https://expo.dev/go) app on your phone (iOS or Android) The Expo Go app that you install from the App/Play Store needs to support Expo SDK 54, which this project targets.
 
 ## Setup
 
@@ -45,36 +52,20 @@ npx expo start
 
 Wait for `Waiting on http://localhost:8081` in the terminal, then either:
 
-- Scan the QR code shown in the terminal with your phone's camera (iOS) or the Expo Go app (Android), **or**
-- On your phone, open Expo Go → your project should appear under "Recently in development" if you're signed into the same Expo account, **or**
-- Manually enter `exp://<your-computer's-LAN-IP>:8081` in Expo Go / Safari (find your IP with `ipconfig` on Windows or `ifconfig`/`ipconfig getifaddr en0` on Mac).
+To view your React Native project run on your phone, follow these steps:
 
-Your phone and computer must be on the **same Wi-Fi network**.
+1. Scan the QR code shown on your terminal using your phone's camera (iOS) or the Expo Go app (Android)
 
-### Don't use `--tunnel`
+or
 
-Expo's built-in `--tunnel` flag relies on a shared, legacy ngrok integration that is frequently broken (`CommandError: failed to start tunnel`, `remote gone away`, timeouts). Plain `npx expo start` over your local network (LAN mode, the default) is far more reliable — fix LAN connectivity issues instead of reaching for `--tunnel`. Also avoid `-d`/`--dev-client` — that's for a custom development build, not Expo Go, and this project doesn't have `expo-dev-client` installed.
+2. Open Expo Go on your phone. If you're logged in to the same Expo account you used to start the project, your project should appear in your "Recently in development" projects
 
-### Troubleshooting: phone can't connect over LAN
+or
 
-If Expo Go can't reach the dev server ("internet connection appears to be offline" or similar) even though your phone and computer are on the same Wi-Fi:
+3. Manually enter exp://:8081 in Expo Go/Safari (see below how to find your IP)
 
-**Windows Firewall** is the most common cause — it silently blocks incoming connections to `node.exe` on networks marked "Public." Fix it by adding a firewall rule for your active Node.js install. In an **elevated** PowerShell (right-click → Run as administrator):
 
-```powershell
-# Find your active node.exe path first:
-where node
-
-# Then allow it through the firewall (adjust the path if different):
-New-NetFirewallRule -DisplayName "node.exe" -Direction Inbound -Program "C:\Program Files\nodejs\node.exe" -Action Allow -Profile Any -Protocol TCP
-New-NetFirewallRule -DisplayName "node.exe" -Direction Inbound -Program "C:\Program Files\nodejs\node.exe" -Action Allow -Profile Any -Protocol UDP
-```
-
-**Port 8081 already in use**: on Windows, stopping the `expo start` process doesn't always kill the underlying Node process. If you see "Port 8081 is being used by another process," open Task Manager, find the stray `node.exe`, and end it (or restart your terminal/computer).
-
-## Notifications
-
-Reminders use **local** scheduled notifications (`expo-notifications`), which work fine in Expo Go — no custom development build needed. Turn them on from Settings (hamburger menu → Settings → Reminders), which will prompt for OS notification permission. Once enabled, you'll get notified for upcoming task deadlines, scheduled study sessions (from the Calendar), and when a running Timer session completes — including while the app is backgrounded or the phone is locked. Settings also has a "Send test notification" button that fires ~5 seconds later, so you can verify permissions and delivery without waiting for a real reminder.
+Make sure your phone is connected to the same Wi-Fi network as your computer.
 
 ## Technologies Used
 
@@ -85,19 +76,6 @@ Reminders use **local** scheduled notifications (`expo-notifications`), which wo
 - `@react-native-community/datetimepicker` for date/time pickers
 - `expo-notifications` for local reminders
 - `@expo/vector-icons` (Ionicons)
-
-## Project structure
-
-```
-src/
-  app/            Screens (file-based routes): index (Home), subjects, timer, calendar, settings
-  components/      Shared UI primitives (themed text/view, etc.)
-  constants/       Theme tokens, task-type definitions
-  hooks/           App state — tasks, subjects, sessions/goals, notifications, theme preference
-  utils/           Date helpers, AsyncStorage helpers
-```
-
-Each piece of app state (tasks, subjects, sessions & goals, notification preference, theme preference) lives in its own React context under `src/hooks/`, persisted to `AsyncStorage` and loaded on startup.
 
 ## Linting
 
