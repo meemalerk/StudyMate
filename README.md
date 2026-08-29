@@ -15,6 +15,16 @@ A study companion app built with Expo — track tasks, assignments and exams, ma
 
 All data (tasks, subjects, sessions, goals, preferences) is saved on-device and persists across app restarts.
 
+## Screenshots
+
+| | |
+|---|---|
+| <img src="Screenshots/home.jpg" width="220" alt="Home dashboard" /><br>**Home** — today's stats, study goals, and upcoming deadlines | <img src="Screenshots/subjects.jpg" width="220" alt="Subjects screen" /><br>**Subjects** — tasks grouped by subject, each with its own weekly goal |
+| <img src="Screenshots/timer.jpg" width="220" alt="Study timer" /><br>**Study Timer** — preset or custom countdown, optionally tagged to a subject | <img src="Screenshots/calendar.jpg" width="220" alt="Study calendar" /><br>**Study Calendar** — scheduled sessions, deadlines, and completed sessions by date |
+| <img src="Screenshots/settings.jpg" width="220" alt="Settings screen" /><br>**Settings** — reminders toggle and theme (System / Light / Dark) | |
+
+**Navigation flow:** the hamburger icon in the top-right of Home opens a dropdown linking to Subjects, Study Timer, Study Calendar, and Settings. Every other screen has a back arrow (top-left) that returns to Home.
+
 ## Requirements
 
 - [Node.js](https://nodejs.org/) (LTS)
@@ -66,7 +76,7 @@ New-NetFirewallRule -DisplayName "node.exe" -Direction Inbound -Program "C:\Prog
 
 Reminders use **local** scheduled notifications (`expo-notifications`), which work fine in Expo Go — no custom development build needed. Turn them on from Settings (hamburger menu → Settings → Reminders), which will prompt for OS notification permission. Once enabled, you'll get notified for upcoming task deadlines, scheduled study sessions (from the Calendar), and when a running Timer session completes — including while the app is backgrounded or the phone is locked. Settings also has a "Send test notification" button that fires ~5 seconds later, so you can verify permissions and delivery without waiting for a real reminder.
 
-## Tech stack
+## Technologies Used
 
 - [Expo SDK 54](https://docs.expo.dev/versions/v54.0.0/) / React Native 0.81
 - [Expo Router](https://docs.expo.dev/router/introduction/) (file-based routing, screens under `src/app/`)
